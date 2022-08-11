@@ -1,3 +1,4 @@
+const CopyPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
@@ -25,6 +26,14 @@ module.exports = {
         test: /styles.css$/i,
         use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: "file-loader",
+          },
+        ],
+      },
     ],
   },
   optimization: {},
@@ -35,8 +44,11 @@ module.exports = {
       template: "./src/index.html",
     }),
     new MiniCssExtractPlugin({
-        filename: '[name].[hash].css',
-        ignoreOrder: false
-    })
+      filename: "[name].css",
+      ignoreOrder: false,
+    }),
+    new CopyPlugin({
+      patterns: [{ from: "src/assets/", to: "assets/" }],
+    }),
   ],
 };

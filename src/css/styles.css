@@ -3,3 +3,8 @@ html,body{
     background-color: red;
     margin: 0;
 }
+
+img{
+    width: 150;
+    height: 100px;
+}
